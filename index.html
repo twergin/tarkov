@@ -16,11 +16,14 @@
             display: inline-block;
         }
         #sketchContainer {
-            background-image: url('./tarkov/img/map.jpg');
+            background-image: url('./tarkov/img/interchange-1.jpg');
+            /* background-image: url('Users/Ted/Documents/cheeki/img/woods.jpg'); */
             background-size: cover;
             background-repeat: no-repeat;
             width: 70vw;
             height: calc(70vw * 0.66);
+            display: inline-block;
+            float: left;
         }
         @media(max-width: 800px) {
           #sketchContainer {
@@ -56,6 +59,18 @@
           width: 70px;
           border-radius: 0;
         }
+        .map-list {
+          list-style-type: none;
+          margin: 0;
+          padding: 60px 40px;
+          width: 20vw;
+          float: right;
+          text-align: left;
+        }
+        .map-list li {
+          color: #357ebd;
+          cursor: pointer;
+        }
 
     </style>
 </head>
@@ -72,7 +87,14 @@
           <a class="btn btn-success color-picker black-pick upper-button">Black</a>
         </div>
         <div class="clearfix"></div>
+
+
         <div id="sketchContainer" style="border: 1px solid rgba(0,0,0,0.2)"><canvas id="sketch"></canvas></div>
+        <ul class="map-list">
+          <li data-src="https://twergin.github.io/tarkov/img/woods.jpg">Woods</li>
+          <li data-src="https://twergin.github.io/tarkov/img/interchange-1.jpg">Interchange First Floor</li>
+        </ul>
+
         <div class="btn-group btn-group-justified" style="margin-right: auto; width: 70%;">
             <a class="btn btn-info user-color-pick bottom-button" style="width: 15%;">User Color</a>
           <a class="btn btn-success plus-size" style="width: 15%;">
@@ -97,10 +119,7 @@
 </body>
 <script>
 
-$('#setBg').click(function () {
-  var newSrc = $('#bgSrc').val();
-  $('#sketchContainer').css('background-image', 'url(' + newSrc + ')');
-});
+
   // get the canvas element and its context
 var canvas = document.getElementById('sketch');
 var context = canvas.getContext('2d');
@@ -225,6 +244,38 @@ function move(e) {
   }
   lastMouse = mouse;
 }
+
+$('#setBg').click(sendBgChange);
+
+$('.map-list').on('click', 'li', function(event) {
+  sendBgChange($(this).attr('data-src'));
+})
+
+function sendBgChange(src = null) {
+
+  var url = src !== null ? src : $('#bgSrc').val();
+  
+  if (url.indexOf('https') < 0) {
+    alert('Image must use https:// protocol');
+    return;
+  }
+  if (TogetherJS.running) {
+    TogetherJS.send({
+      type: 'setBg',
+      src: url
+    });
+  }
+  $('#sketchContainer').css('background-image', 'url(' + url + ')');
+}
+
+TogetherJS.hub.on('setBg', function (msg) {
+  if (!msg.sameUrl) {
+      return;
+  }
+  $('#sketchContainer').css('background-image', 'url(' + msg.src + ')');
+});
+
+
 
 // Listens for draw messages, sends info about the drawn lines:
 TogetherJS.hub.on('draw', function (msg) {
