@@ -16,10 +16,11 @@
             display: inline-block;
         }
         #sketchContainer {
-            background-image: url('./img/map.jpg');
+            background-image: url('Users/Ted/Documents/tarkov/img/map.jpg');
             background-size: contain;
+            background-repeat: no-repeat;
             width: 100vw;
-            height: auto;
+            height: 900px;
         }
         .upper-button {
             border-bottom-left-radius: 0px;
@@ -37,6 +38,17 @@
             background-color: #202020;
             border-color: #202020;
         }
+        .btn_container {
+          display: flex;
+          width: 500px;
+          flex-flow: row wrap;
+          align-items: center;
+          justify-content: flex-start;
+        }
+        .btn_container>.btn {
+          width: 70px;
+          border-radius: 0;
+        }
 
     </style>
 </head>
@@ -46,19 +58,18 @@
             var TogetherJSConfig_dontShowClicks = '#sketchContainer';
         </script>
         <script src="https://togetherjs.com/togetherjs-min.js"></script>
-        <a onclick="TogetherJS(this); return false;"><img src="https://togetherjs.com/images/start-togetherjs-blue.png" style="width: 135px" /></a>
         
-        <div class="btn-group btn-group-justified" style="margin-right: auto; margin-top: 10px; width: 70%;"> 
-          <a class="btn btn-info color-picker upper-button">Blue</a>          
+        <div class="btn_container" style="margin-right: auto; margin-top: 0;">
+          <a class="btn btn-primary" onclick="TogetherJS(this); return false;">Start</a>
+          <a class="btn btn-info color-picker upper-button">Blue</a> 
           <a class="btn btn-success color-picker">Green</a>
           <a class="btn btn-warning color-picker">Yellow</a>
           <a class="btn btn-danger color-picker">Red</a>
-          <a class="btn btn-success color-picker black-pick upper-button" style="border-bottom-width: 0px;">Black</a>
+          <a class="btn btn-success color-picker black-pick upper-button">Black</a>
         </div>
         <div class="clearfix"></div>
         <div id="sketchContainer" style="border: 1px solid rgba(0,0,0,0.2)"><canvas id="sketch"></canvas></div>
-        <div class="btn-group btn-group-justified" style="margin-right: auto; width: 70%;"> 
-          <a class="btn btn-info user-color-pick bottom-button" style="width: 30%;">User Color</a>
+        <div class="btn-group btn-group-justified" style="margin-right: auto; width: 70%;">
           <a class="btn btn-success plus-size" style="width: 15%;">
             <i class="fa fa-plus-square"></i>
           </a>
@@ -80,7 +91,6 @@ var context = canvas.getContext('2d');
 
 // the aspect ratio is always based on 1140x400, height is calculated from width:
 canvas.width = $('#sketchContainer').outerWidth();
-canvas.height = (canvas.width/1140)*400;
 canvas.height = $('#sketchContainer').outerHeight();
 // scale function needs to know the width/height pre-resizing:
 var oWidth = canvas.width;
