@@ -244,8 +244,6 @@ TogetherJS.hub.on('init', function (msg) {
 
 // JQuery to handle buttons and resizing events, also changes the cursor to a dot resembling the brush size:
 $(document).ready(function () {
-  setColor(TogetherJS.require('peers').Self.color);
-  changeMouse();
   // changeMouse creates a temporary invisible canvas that shows the cursor, which is then set as the cursor through css:
   function changeMouse() {
     // Makes sure the cursorSize is scaled:
