@@ -16,7 +16,7 @@
             display: inline-block;
         }
         #sketchContainer {
-            background-image: url('./tarkov/img/map.jpg');
+            background-image: url('Users/Ted/documents/cheeki/img/map.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             width: 70vw;
@@ -88,12 +88,19 @@
             <i class="fa fa-eraser"></i>
           </a>
         </div>
+        <input type="text" id="bgSrc" placeholder="background image"/>
+        <button class="btn btn-primary" id="setBg">set background image</button>
         <script>
           var TogetherJSConfig_dontShowClicks = true;
       </script>
       <script src="https://togetherjs.com/togetherjs-min.js"></script>
 </body>
 <script>
+
+$('#setBg').click(function () {
+  var newSrc = $('#bgSrc').val();
+  $('#sketchContainer').css('background-image', 'url(' + newSrc + ')');
+});
   // get the canvas element and its context
 var canvas = document.getElementById('sketch');
 var context = canvas.getContext('2d');
