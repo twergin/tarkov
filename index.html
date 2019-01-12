@@ -70,6 +70,7 @@
         <div class="clearfix"></div>
         <div id="sketchContainer" style="border: 1px solid rgba(0,0,0,0.2)"><canvas id="sketch"></canvas></div>
         <div class="btn-group btn-group-justified" style="margin-right: auto; width: 70%;">
+            <a class="btn btn-info user-color-pick bottom-button" style="width: 15%;">User Color</a>
           <a class="btn btn-success plus-size" style="width: 15%;">
             <i class="fa fa-plus-square"></i>
           </a>
@@ -243,6 +244,8 @@ TogetherJS.hub.on('init', function (msg) {
 
 // JQuery to handle buttons and resizing events, also changes the cursor to a dot resembling the brush size:
 $(document).ready(function () {
+  setColor(TogetherJS.require('peers').Self.color);
+  changeMouse();
   // changeMouse creates a temporary invisible canvas that shows the cursor, which is then set as the cursor through css:
   function changeMouse() {
     // Makes sure the cursorSize is scaled:
