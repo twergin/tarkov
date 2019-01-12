@@ -17,7 +17,7 @@
         }
         #sketchContainer {
             background-image: url('./tarkov/img/interchange-1.jpg');
-            /* background-image: url('Users/Ted/Documents/cheeki/img/woods.jpg'); */
+            /* background-image: url('https://twergin.github.io/tarkov/img/interchange-1.jpg'); */
             background-size: cover;
             background-repeat: no-repeat;
             width: 70vw;
@@ -158,6 +158,24 @@ canvas.addEventListener('mouseout', function () {
 
 canvas.addEventListener('mouseup', function () {
   canvas.removeEventListener('mousemove', move, false);
+}, false);
+
+
+// touch event listeners.
+canvas.addEventListener('touchstart', function (e) {
+  lastMouse = {
+    x: e.pageX - this.offsetLeft,
+    y: e.pageY - this.offsetTop
+  };
+  canvas.addEventListener('touchmove', move, false);
+}, false);
+
+canvas.addEventListener('touchend', function () {
+  canvas.removeEventListener('touchmove', move, false);
+}, false);
+
+canvas.addEventListener('touchcancel', function () {
+  canvas.removeEventListener('touchmove', move, false);
 }, false);
 
 // Sets the brush size:
