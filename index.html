@@ -17,10 +17,16 @@
         }
         #sketchContainer {
             background-image: url('./tarkov/img/map.jpg');
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
-            width: 100vw;
-            height: 900px;
+            width: 70vw;
+            height: calc(70vw * 0.66);
+        }
+        @media(max-width: 800px) {
+          #sketchContainer {
+            width: 70vw;
+            height: calc(70vw * 0.66);
+          }
         }
         .upper-button {
             border-bottom-left-radius: 0px;
@@ -41,6 +47,7 @@
         .btn_container {
           display: flex;
           width: 500px;
+          max-width: 100vw;
           flex-flow: row wrap;
           align-items: center;
           justify-content: flex-start;
@@ -54,10 +61,7 @@
 </head>
 
 <body>
-        <script>
-            var TogetherJSConfig_dontShowClicks = true;
-        </script>
-        <script src="https://togetherjs.com/togetherjs-min.js"></script>
+        
         
         <div class="btn_container" style="margin-right: auto; margin-top: 0;">
           <a class="btn btn-primary" onclick="TogetherJS(this); return false;">Start</a>
@@ -84,6 +88,10 @@
             <i class="fa fa-eraser"></i>
           </a>
         </div>
+        <script>
+          var TogetherJSConfig_dontShowClicks = true;
+      </script>
+      <script src="https://togetherjs.com/togetherjs-min.js"></script>
 </body>
 <script>
   // get the canvas element and its context
@@ -274,7 +282,7 @@ $(document).ready(function () {
   $(window).resize(function() {
     if ($('#sketchContainer').width() != oWidth) {
       canvas.width = $('#sketchContainer').width();
-      canvas.height = (canvas.width/1140)*400;
+      canvas.height = (canvas.width)*0.66;
       $('#sketchContainer').outerHeight(String(canvas.height)+"px", true);
       var ratio = canvas.width/oWidth;
       oWidth = canvas.width;
