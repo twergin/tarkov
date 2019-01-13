@@ -25,18 +25,6 @@
             display: inline-block;
             float: left;
         }
-        @media(max-width: 500px) {
-          #sketchContainer {
-            width: 100vw;
-            height: calc(100vw * 0.66);
-          }
-          .map-list {
-            display: none;
-          }
-          .btn_container>.btn {
-            width: 60px;
-          }
-        }
         .upper-button {
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
@@ -73,9 +61,37 @@
           float: right;
           text-align: left;
         }
+        .map-list.mobile {
+          display: none;
+        }
         .map-list li {
           color: #357ebd;
           cursor: pointer;
+        }
+        @media(max-width: 500px) {
+          #sketchContainer {
+            width: 100vw;
+            height: calc(100vw * 0.66);
+          }
+          .map-list {
+            display: none;
+          }
+          .btn_container>.btn {
+            width: 60px;
+          }
+          #bgSrc, #setBg {
+            display: none;
+          }
+          .map-list.mobile {
+            display: block;
+            margin: 0;
+            float: left;
+            width: 100%;
+          }
+          .map-list.mobile li {
+            padding: 10px 0;
+            font-size: 1.25em;
+          }
         }
 
     </style>
@@ -122,6 +138,15 @@
         </div>
         <input type="text" id="bgSrc" placeholder="background image"/>
         <button class="btn btn-primary" id="setBg">set background image</button>
+        <div class="clearfix"></div>
+        <ul class="map-list mobile">
+          <li data-src="https://twergin.github.io/tarkov/img/woods.jpg">Woods</li>
+          <li data-src="https://twergin.github.io/tarkov/img/shoreline.png">Shoreline</li>
+          <li data-src="https://twergin.github.io/tarkov/img/customs.png">Customs</li>
+          <li data-src="https://twergin.github.io/tarkov/img/interchange-1.jpg">Interchange First Floor</li>
+          <li data-src="https://twergin.github.io/tarkov/img/interchange-2.jpg">Interchange Second Floor</li>
+          <li data-src="https://twergin.github.io/tarkov/img/interchange-3.jpg">Interchange Exterior</li>
+        </ul>
         <script>
           var TogetherJSConfig_dontShowClicks = true;
       </script>
