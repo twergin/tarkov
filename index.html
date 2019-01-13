@@ -20,7 +20,7 @@
         #sketchContainer {
             background-image: url('./tarkov/img/woods.jpg');
             /* background-image: url('https://twergin.github.io/tarkov/img/interchange-1.jpg'); */
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             width: 70vw;
             height: calc(70vw * 0.66);
@@ -316,27 +316,28 @@ function move(e) {
   lastMouse = mouse;
 }
 
-$('#setBg').click(sendBgChange);
+$('#setBg').on('click', function() {
+  var src = $('#bgSrc').val();
+  sendBgChange(src);
+});
 
 $('.map-list').on('click', 'li', function(event) {
   sendBgChange($(this).attr('data-src'));
 })
 
-function sendBgChange(src = null) {
-
-  var url = src !== null ? src : $('#bgSrc').val();
+function sendBgChange(newSrc) {
   
-  if (url.indexOf('https') < 0) {
+  if (newSrc.indexOf('https') < 0) {
     alert('Image must use https:// protocol');
     return;
   }
   if (TogetherJS.running) {
     TogetherJS.send({
       type: 'setBg',
-      src: url
+      src: newSrc
     });
   }
-  $('#sketchContainer').css('background-image', 'url(' + url + ')');
+  $('#sketchContainer').css('background-image', 'url(' + newSrc + ')');
 }
 
 TogetherJS.hub.on('setBg', function (msg) {
